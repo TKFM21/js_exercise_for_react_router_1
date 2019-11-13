@@ -27,16 +27,39 @@ class Quiz extends React.Component {
     }
 
     render() {
-        let quizRender;
-        if (this.state.quizzes.length) {
-            quizRender = <h2>Quiz get.</h2>;
-        } else {
-            quizRender = <p>Now Loading...</p>
+        const { quizzes, currentIndex } = this.state;
+        if (!quizzes.length && !currentIndex) {
+            return this.loadingRender();
         }
+        if (quizzes.length > 0 && currentIndex < quizzes.length - 1) {
+            const quiz = quizzes[currentIndex];
+            return this.quizRender(quiz);
+        }
+        return <h1>Another State</h1>;
+    }
+
+    loadingRender() {
         return (
             <div>
                 <h1>Quiz</h1>
-                {quizRender}
+                <p>Now Loading...</p>
+                <hr/>
+                <Link to="/">Homeへ</Link>
+            </div>
+        );
+    }
+
+    quizRender(quiz) {
+        const answers = quiz.shuffledAnswers().map( (answer, index) => {
+            return (
+                <li key={ index }>{ answer }</li>
+            );
+        });
+        return (
+            <div>
+                <h1>Quiz</h1>
+                <h2>{ quiz.question }</h2>
+                <ul>{ answers }</ul>
                 <hr/>
                 <Link to="/">Homeへ</Link>
             </div>
