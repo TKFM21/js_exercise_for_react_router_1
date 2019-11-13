@@ -1,9 +1,18 @@
 import React from 'react';
+import {
+  HashRouter as Router,
+  Route
+} from 'react-router-dom';
 import './App.css';
+import Home from './components/Home/Home';
+import Quiz from './components/Quiz/Quiz';
 
 function App() {
   return (
-    <h1>Hello</h1>
+    <Router>
+      <Route path="/" exact component={Home} />
+      <Route path="/quiz/" exact component={Quiz} />
+    </Router>
   );
 }
 
