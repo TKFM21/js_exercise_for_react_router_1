@@ -9,10 +9,12 @@ import Quiz from './components/Quiz/Quiz';
 
 function App() {
   return (
-    <Router>
-      <Route path="/" exact component={Home} />
-      <Route path="/quiz/" exact component={Quiz} />
-    </Router>
+    <div className="App">
+      <Router>
+        <Route path="/" exact component={Home} />
+        <Route path="/quiz/" exact component={Quiz} />
+      </Router>
+    </div>
   );
 }
 

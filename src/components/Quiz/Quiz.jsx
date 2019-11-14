@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import QuizModel from '../../models/Quiz';
+import './Quiz.css';
+import Button from '../Button/Button';
 
 class Quiz extends React.Component {
     constructor(props) {
@@ -33,7 +35,7 @@ class Quiz extends React.Component {
             numberOfCorrected++;
             window.alert('正解！！');
         } else {
-            window.alert(`間違い！！ 正解は：${quiz.correctAnswer}`);
+            window.alert(`間違い！！ 正解は：${ quiz.correctAnswer }`);
         }
         currentIndex++;
         this.setState({ numberOfCorrected, currentIndex });
@@ -54,8 +56,8 @@ class Quiz extends React.Component {
             <div>
                 <h1>Quiz</h1>
                 <h2>Result</h2>
-                <h3>{numberOfCorrected}/{quizzes.length}</h3>
-                <h3><button onClick={this.quizFetch}>Restart</button></h3>
+                <h3>{ numberOfCorrected }/{ quizzes.length }</h3>
+                <div onClick={ this.quizFetch }><Button>Restart</Button></div>
                 <hr/>
                 <Link to="/">Homeへ</Link>
             </div>
@@ -80,7 +82,7 @@ class Quiz extends React.Component {
                     key={ index }
                     onClick={ () => this.judgeAndNextQuiz(quiz, answer) }
                 >
-                    { answer }
+                    <Button>{ answer }</Button>
                 </li>
             );
         });
@@ -88,7 +90,7 @@ class Quiz extends React.Component {
             <div>
                 <h1>Quiz</h1>
                 <h2>{ quiz.question }</h2>
-                <ul>{ answers }</ul>
+                <ul className="answers">{ answers }</ul>
                 <hr/>
                 <Link to="/">Homeへ</Link>
             </div>
