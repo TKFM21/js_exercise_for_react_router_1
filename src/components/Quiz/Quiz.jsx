@@ -26,13 +26,27 @@ class Quiz extends React.Component {
         this.setState({ quizzes });
     }
 
+    judgeAndNextQuiz(quiz, answer) {
+        let { numberOfCorrected, currentIndex } = this.state;
+        if (quiz.correctAnswer === answer) {
+            numberOfCorrected++;
+            window.alert('正解！！');
+        } else {
+            window.alert(`間違い！！ 正解は：${quiz.correctAnswer}`);
+        }
+        currentIndex++;
+        this.setState({ numberOfCorrected, currentIndex });
+    }
+
     render() {
         const { quizzes, currentIndex } = this.state;
         if (!quizzes.length && !currentIndex) {
+            // Loading画面へ
             return this.loadingRender();
         }
         if (quizzes.length > 0 && currentIndex < quizzes.length - 1) {
             const quiz = quizzes[currentIndex];
+            // クイズ表示画面へ
             return this.quizRender(quiz);
         }
         return <h1>Another State</h1>;
@@ -52,7 +66,12 @@ class Quiz extends React.Component {
     quizRender(quiz) {
         const answers = quiz.shuffledAnswers().map( (answer, index) => {
             return (
-                <li key={ index }>{ answer }</li>
+                <li
+                    key={ index }
+                    onClick={ () => this.judgeAndNextQuiz(quiz, answer) }
+                >
+                    { answer }
+                </li>
             );
         });
         return (
