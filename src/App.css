@@ -1,0 +1,7 @@
+.App {
+  text-align: center;
+  width: 600px;
+  height: 100%;
+  margin: 10px auto;
+  box-sizing: border-box;
+}
