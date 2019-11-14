@@ -10,6 +10,7 @@ class Quiz extends React.Component {
             numberOfCorrected: 0,
             quizzes: [],
         };
+        this.quizFetch = this.quizFetch.bind(this);
     }
 
     async componentDidMount() {
@@ -39,7 +40,7 @@ class Quiz extends React.Component {
     }
 
     render() {
-        const { quizzes, currentIndex } = this.state;
+        const { quizzes, currentIndex, numberOfCorrected } = this.state;
         if (!quizzes.length && !currentIndex) {
             // Loading画面へ
             return this.loadingRender();
@@ -49,7 +50,16 @@ class Quiz extends React.Component {
             // クイズ表示画面へ
             return this.quizRender(quiz);
         }
-        return <h1>Another State</h1>;
+        return (
+            <div>
+                <h1>Quiz</h1>
+                <h2>Result</h2>
+                <h3>{numberOfCorrected}/{quizzes.length}</h3>
+                <h3><button onClick={this.quizFetch}>Restart</button></h3>
+                <hr/>
+                <Link to="/">Homeへ</Link>
+            </div>
+        );
     }
 
     loadingRender() {
